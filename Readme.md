@@ -6,12 +6,12 @@ Here is a detailed breakdown of each step in the pipeline, including the key lib
 ### 1. Generate Script
 -   **What it does:** Creates a video script based on the user's topic.
 -   **User Input:** `Video Subject` (e.g., "The future of renewable energy").
--   **Tool/Library:** Google **Gemini**
+-   **Tool/Library:** Google **Gemini** [Optional]**
 -   **File Involved:** `app/services/llm.py`
 
 ### 2. Generate Keywords
 -   **What it does:** Analyzes the script to extract relevant keywords for finding video clips.
--   **Tool/Library:** Google **Gemini**
+-   **Tool/Library:** Google **Gemini** [Optional]**
 -   **File Involved:** `app/services/llm.py`
 
 ### 3. Generate Voiceover
@@ -102,45 +102,79 @@ This guide will walk you through setting up and running the project on your loca
 
 ### Method 1: Running with Docker (Recommended)
 
-Using Docker is the easiest way to get started, as it handles all dependencies (including FFmpeg and ImageMagick) for you.
+Using Docker is the easiest way to get started, since it bundles all dependencies (FFmpeg, ImageMagick, Python libraries) into a container. Just follow the steps below:
 
-**Step 1: Clone the Repository**
+---
+
+#### **Step 0: Install Docker (if you don’t have it yet)**
+Before running this project, you need **Docker** and **Docker Compose**.
+
+- 📥 Download and install Docker Desktop: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+- After installing, verify it works:
+  ```sh
+  docker --version
+  docker compose version
+  ```
+
+---
+
+#### **Step 1: Clone the Repository**
 
 ```sh
 git clone https://github.com/Vishal-Kumar-S/textToVideoGeneration.git
 cd textToVideoGeneration
 ```
 
-This project requires a `config.toml` file in the root directory to function. This file contains essential API keys and settings.
+---
 
-> **Important:** The `config.toml` file is intentionally not included in this GitHub repository for security reasons. You will receive this file separately from the repo owner.
+#### **Step 2: Add Your Configuration File**
 
-Place the `config.toml` file you received into the root of the project folder. The application will not start without it.
+This project requires a `config.toml` file in the root directory.
+- This file holds API keys and settings.
+- It is **not included in the repository** for security reasons.
+- You will receive it separately from the repo owner.
 
-
-**Step 2: Build the Docker Image**
-
-You only need to do this once.
-
-```sh
-docker-compose build
-```
-
-**Step 3: Run the Docker Container**
-
-This command starts the application inside a container. It mounts your local `config.toml` and `storage` directory into the container, so your configurations and generated videos persist even if the container is removed.
-
-```sh
-docker-compose up
-```
-
-The application will now be running. Open your browser to `http://localhost:8501` to use it.
-
--   To **stop** the container: `docker stop text-to-video-app`
--   To **restart** it later: `docker start text-to-video-app`
-
+👉 Place the `config.toml` file into the project’s root folder **before running Docker**.  
+Without it, the application will fail to start.
 
 ---
+
+#### **Step 3: Build the Docker Image**
+
+This sets up everything (you only need to do it once):
+
+```sh
+docker compose build
+```
+
+---
+
+#### **Step 4: Run the Application**
+
+Start the containers with:
+
+```sh
+docker compose up
+```
+
+- The `config.toml` file and `storage` directory are mounted into the container so your settings and generated videos persist.
+- Once running, open: [http://localhost:8501](http://localhost:8501) 🎉
+
+---
+
+#### **Step 5: Stop the Application**
+
+To stop and clean up the running containers:
+
+```sh
+docker compose down
+```
+
+---
+
+✅ That’s it! You now have **textToVideoGeneration** running in Docker.
+
+----------------------------------------------------------------------------------------------------------------------------
 ### Method 2: Running Locally with Python (Not Recommended)
 
 Follow these steps if you prefer to run the project directly on your machine without Docker.
