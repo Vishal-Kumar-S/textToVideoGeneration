@@ -141,7 +141,7 @@ The application will now be running. Open your browser to `http://localhost:8501
 
 
 ---
-### Method 1: Running Locally with Python (Not Recommended)
+### Method 2: Running Locally with Python (Not Recommended)
 
 Follow these steps if you prefer to run the project directly on your machine without Docker.
 

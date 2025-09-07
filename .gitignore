@@ -24,4 +24,4 @@ node_modules
 venv/
 .venv
 ssh-key
-
+ssh-key.pub
